@@ -31,3 +31,6 @@ for each city:
     - calculate benefit
     - get location
     - show tax benefit bubble on the map by index
+
+    הוספת גאומטריות מאתר המארח למפה
+https://api.govmap.gov.il/#zoom-to-drawing

@@ -17,10 +17,16 @@ export default class GovmapService {
             zoomButtons: false,
         });
     }
-    getCityCoords() {
-        window.govmap.geocode({ keyword: 'אבירים', type: window.govmap.geocodeType.AccuracyOnly }
-        ).then(function (response) {
-            console.log(response)
-        });
+    async הוספת גאומטריות מאתר המארח למפה
+    () {
+        const response = await window.govmap.geocode({ keyword: 'אבירים', type: window.govmap.geocodeType.AccuracyOnly })
+        console.log(response)
+        const answers = response.data
+        const rightAnswer = answers.find(x=> x.ObjectKey == 'SETL_CODE')
+        return {
+            city: rightAnswer.ResultLable,
+            x: rightAnswer.X,
+            y: rightAnswer.Y
+        }
     }
 }

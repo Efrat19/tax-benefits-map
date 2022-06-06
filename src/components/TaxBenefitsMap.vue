@@ -24,7 +24,8 @@ export default {
   },
   mounted() {
     this.includeGovMapAPI()
-    // setTimeout(this.govmapService.createMap, 3000);
+    setTimeout(this.govmapService.createMap, 3000);
+    setTimeout(this.govmapService.getCityCoords, 3000);
 
   },
   methods: {
