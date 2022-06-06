@@ -22,3 +22,12 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+- enter monthly salary
+- enter your tax percent
+- get cities with tax benefits
+for each city:
+    - calculate benefit
+    - get location
+    - show tax benefit bubble on the map by index
