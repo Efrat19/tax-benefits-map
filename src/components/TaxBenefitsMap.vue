@@ -9,11 +9,13 @@
 import $ from "jquery";
 // eslint-disable-next-line
 import GovmapService from './govmapService.js'
+import TaxCalcService from './taxCalcService.js'
 export default {
   name: "TaxBenefitsMap",
   data(){
       return {
         govmapService: new GovmapService(),
+        taxCalcService: new TaxCalcService(this.income),
       }
     },
   props: {
@@ -24,11 +26,13 @@ export default {
   },
   mounted() {
     this.includeGovMapAPI()
-    setTimeout(this.govmapService.createMap, 3000);
-    setTimeout(this.govmapService.getCityCoords, 3000);
-
+    setTimeout(this.startMap, 3000);
   },
   methods: {
+    startMap(){
+      this.govmapService.createMap()
+      this.govmapService.drawBubbles(this.taxCalcService)
+    },
     includeGovMapAPI() {
       if (document.getElementById('govmap-api')) return; // was already loaded
       var scriptTag = document.createElement("script");
