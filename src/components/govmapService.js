@@ -17,8 +17,7 @@ export default class GovmapService {
             zoomButtons: false,
         });
     }
-    async הוספת גאומטריות מאתר המארח למפה
-    () {
+    async getCityCoords() {
         const response = await window.govmap.geocode({ keyword: 'אבירים', type: window.govmap.geocodeType.AccuracyOnly })
         console.log(response)
         const answers = response.data
