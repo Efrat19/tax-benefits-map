@@ -2,7 +2,7 @@
   <div class="hello">
       <label for="income">Enter your monthly bruto:</label><br>
     <input type="number" name="month bruto" v-model="income" id="income">
-      <button type="submit" @onclick="onSubmit">
+      <button type="submit" @click="onSubmit">
             Calculate
         </button>
     <div id="map" style="width: 1500px; height: 800px"></div>
