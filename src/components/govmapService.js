@@ -34,7 +34,7 @@ export default class GovmapService {
         const tooltips = []
         // const headers = []
         await taxCalculator.cityTaxArray.map(cityTax => {
-            coords = this.getCityCoords(cityTax)
+            const coords = this.getCityCoords(cityTax)
             wkts.push(this.coordsToWkt(coords.x,coords.y))
             names.push(cityTax.cityName)
             tooltips.push(taxCalculator.calcMonthlyBenefitBy(cityTax))

@@ -11,7 +11,7 @@ export default class TaxCalcService {
     calcMonthlyBenefitBy(cityTax) {
         const benefitPercent = cityTax.benefitRate / 100
         const annualIncome = this.income * 12
-        const incomeForBenefit = min(annualIncome, cityTax.benefitCeiling)
+        const incomeForBenefit = Math.min(annualIncome, cityTax.benefitCeiling)
         const benefit = incomeForBenefit * benefitPercent
         const monthlyBenefit = benefit / 12
         return monthlyBenefit
