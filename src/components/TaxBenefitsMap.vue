@@ -1,5 +1,10 @@
 <template>
   <div class="hello">
+      <label for="income">Enter your monthly bruto:</label><br>
+    <input type="number" name="month bruto" v-model="income" id="income">
+      <button type="submit" @onclick="onSubmit">
+            Calculate
+        </button>
     <div id="map" style="width: 1500px; height: 800px"></div>
   </div>
 </template>
@@ -15,12 +20,10 @@ export default {
   data(){
       return {
         govmapService: new GovmapService(),
-        taxCalcService: new TaxCalcService(this.income),
+        taxCalcService: new TaxCalcService(parseInt(this.income)),
+        income: 0
       }
     },
-  props: {
-    income: Number
-  },
   beforeCreate() {
     window.$ = window.jQuery = require('jquery')
   },
@@ -31,7 +34,6 @@ export default {
   methods: {
     startMap(){
       this.govmapService.createMap()
-      this.govmapService.drawBubbles(this.taxCalcService)
     },
     includeGovMapAPI() {
       if (document.getElementById('govmap-api')) return; // was already loaded
@@ -39,7 +41,13 @@ export default {
       scriptTag.src = "https://www.govmap.gov.il/govmap/api/govmap.api.js";
       scriptTag.id = "govmap-api";
       document.getElementsByTagName('head')[0].appendChild(scriptTag);
+    },
+     
+    onSubmit() {
+      this.submit = 1
+      this.govmapService.drawBubbles(this.taxCalcService)
     }
+  
   }
 };
 </script>

@@ -1,6 +1,6 @@
 
 // https://protocol.co.il/beneficiary-settlement/
-import cityTaxArray from './cityTax2022.json'
+import cityTaxArray from './cityTax2022-short.json'
 
 export default class TaxCalcService {
 
@@ -8,6 +8,7 @@ export default class TaxCalcService {
         this.income = income
         this.cityTaxArray = cityTaxArray
     }
+    
     calcMonthlyBenefitBy(cityTax) {
         const benefitPercent = cityTax.benefitRate / 100
         const annualIncome = this.income * 12

@@ -7,7 +7,7 @@
     },
     {
       "cityID": 1342,
-      "cityName": "אבו קורינאת (יישוב)",
+      "cityName": "אבו קורינאת",
       "benefitRate": 12,
       "benefitCeiling": 196080
     },
@@ -2845,7 +2845,7 @@
     },
     {
       "cityID": 1346,
-      "cityName": "תרבין א-צאנע (יישוב)",
+      "cityName": "תרבין א-צאנע",
       "benefitRate": 12,
       "benefitCeiling": 196080
     },

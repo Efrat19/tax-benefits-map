@@ -19,9 +19,13 @@ export default class GovmapService {
     }
     async getCityCoords(cityTax) {
         const response = await window.govmap.geocode({ keyword: cityTax.cityName, type: window.govmap.geocodeType.AccuracyOnly })
-        console.log(response)
         const answers = response.data
-        const rightAnswer = answers.find(x=> x.ObjectID == cityTax.cityID)
+        // console.log('response.data:')
+        // console.log(response.data)
+        const rightAnswer = answers.find(x=> {
+            console.log(` cityTax.cityID: ${cityTax.cityID}, x.ObjectID: ${x.ObjectID}, result: ${x.ObjectID == cityTax.cityID}`)
+            return x.ObjectID == cityTax.cityID
+        })
         return {
             city: rightAnswer.ResultLable,
             x: rightAnswer.X,
@@ -33,21 +37,41 @@ export default class GovmapService {
         const names = []
         const tooltips = []
         // const headers = []
-        await taxCalculator.cityTaxArray.map(cityTax => {
-            const coords = this.getCityCoords(cityTax)
+        await taxCalculator.cityTaxArray.map(async cityTax => {
+            const coords = await this.getCityCoords(cityTax)
+            // console.log('coords:')
+            // console.log(coords)
             wkts.push(this.coordsToWkt(coords.x,coords.y))
             names.push(cityTax.cityName)
-            tooltips.push(taxCalculator.calcMonthlyBenefitBy(cityTax))
+            const benefit = taxCalculator.calcMonthlyBenefitBy(cityTax)
+            tooltips.push(`save ${benefit}₪`)
         })
+        // console.log('wkts') 
+        // console.log(wkts) 
+        // console.log('names') 
+        // console.log(names) 
+        // console.log('tooltips') 
+        // console.log(tooltips) 
+        // const bubbleContent = "<div style='border: 1px solid #525252; margin: 10px;padding: 10px;'><div style='background-color: yellow;'>{0}</div><div               style='background-color: blue;'>{1}</div></div>";
         const request = {
             // wkts: ['POINT(196062.48 621458.39)', 'POINT(200000.48 600000.39)', 'POINT(25000.48 650000.39)' ],
             wkts: wkts,
             names: names,
             geometryType: window.govmap.drawType.Point,
             data: {  
-                tooltips: tooltips  
-                // headers: ['כלכלה','חדשות','תרבות'],
-            }
+                tooltips: tooltips,
+                headers: ['hi', 'hi','hi'],
+                // bubbles: ['hi', 'hi','hi'],
+                // bubbleUrl: 'http://localhost:8080/',
+                // BubbleType: ['BUS','BUS','BUS'],
+                // bubbleHTML: bubbleContent,
+                // bubbleHTMLParameters: [['פוליגון 1','מידע נוסף...'], ['פוליגון 2', 'מידע נוסף...'],['פוליגון 2', 'מידע נוסף...']]
+            },
+            defaultSymbol: {  
+                url:'https://icon-library.com/images/map-point-icon/map-point-icon-17.jpg',  
+                width:15,  
+                height:15  
+            },
         }
         const response = await window.govmap.displayGeometries(request)
         console.log(response)
