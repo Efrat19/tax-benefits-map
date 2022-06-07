@@ -14,13 +14,11 @@
 import $ from "jquery";
 // eslint-disable-next-line
 import GovmapService from './govmapService.js'
-import TaxCalcService from './taxCalcService.js'
 export default {
   name: "TaxBenefitsMap",
   data(){
       return {
         govmapService: new GovmapService(),
-        taxCalcService: new TaxCalcService(parseInt(this.income)),
         income: 0
       }
     },
@@ -44,8 +42,7 @@ export default {
     },
      
     onSubmit() {
-      this.submit = 1
-      this.govmapService.drawBubbles(this.taxCalcService)
+      this.govmapService.drawBubbles(this.income)
     }
   
   }

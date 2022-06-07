@@ -1,8 +1,9 @@
 
+import TaxCalcService from './taxCalcService.js'
 export default class GovmapService {
 
     constructor() {
-
+        this.taxCalcService = new TaxCalcService()
     }
     createMap() {
         window.govmap.createMap("map", {
@@ -32,18 +33,18 @@ export default class GovmapService {
             y: rightAnswer.Y
         }
     }
-    async drawBubbles(taxCalculator) {
+    async drawBubbles(income) {
         const wkts = []
         const names = []
         const tooltips = []
         // const headers = []
-        await taxCalculator.cityTaxArray.map(async cityTax => {
+        await this.taxCalculator.cityTaxArray.map(async cityTax => {
             const coords = await this.getCityCoords(cityTax)
             // console.log('coords:')
             // console.log(coords)
             wkts.push(this.coordsToWkt(coords.x,coords.y))
             names.push(cityTax.cityName)
-            const benefit = taxCalculator.calcMonthlyBenefitBy(cityTax)
+            const benefit = this.taxCalculator.calcMonthlyBenefitBy(cityTax,income)
             tooltips.push(`save ${benefit}₪`)
         })
         // console.log('wkts') 
