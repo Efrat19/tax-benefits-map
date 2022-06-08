@@ -52,7 +52,7 @@ export default class GovmapService {
             geometryType: window.govmap.drawType.Point,
             data: {
                 tooltips: tooltips,
-                // headers: ['hi', 'hi', 'hi'],
+                headers: names,
             },
             defaultSymbol: {
                 url: 'https://icon-library.com/images/map-point-icon/map-point-icon-17.jpg',
@@ -63,14 +63,14 @@ export default class GovmapService {
         return request
       }
     async drawBubbles(income) {
-        console.log('before: displayGeometries')
         try {
             const request = await this.getBubblesRequest(income)
+            console.log('before: displayGeometries')
             const response = await window.govmap.displayGeometries(request)
             console.log('after: displayGeometries')
             console.log(response)
         } catch (error) {
-            console.error(error) // from creation or business logic
+            console.error(error) 
         }
 
     }
