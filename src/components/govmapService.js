@@ -31,25 +31,28 @@ export default class GovmapService {
             y: rightAnswer.Y
         }
     }
-    async drawBubbles(income) {
+    async getBubblesRequest(income) {
         const wkts = []
         const names = []
         const tooltips = []
-        await this.taxCalculator.cityTaxArray.map(async cityTax => {
+        console.log('before map')
+        const cityPromises = this.taxCalculator.cityTaxArray.map(async cityTax => {
             const coords = await this.getCityCoords(cityTax)
             wkts.push(this.coordsToWkt(coords.x, coords.y))
             names.push(cityTax.cityName)
             const benefit = this.taxCalculator.calcMonthlyBenefitBy(cityTax, income)
             tooltips.push(`save ${benefit}₪`)
-            // console.log(`you save ${benefit}₪/month in ${cityTax.cityName}`)
+            console.log(`you save ${benefit}₪/month in ${cityTax.cityName}`)
         })
+        await Promise.all(cityPromises);
+        console.log('after map')
         const request = {
             wkts: wkts,
             names: names,
             geometryType: window.govmap.drawType.Point,
             data: {
                 tooltips: tooltips,
-                headers: ['hi', 'hi', 'hi'],
+                // headers: ['hi', 'hi', 'hi'],
             },
             defaultSymbol: {
                 url: 'https://icon-library.com/images/map-point-icon/map-point-icon-17.jpg',
@@ -57,8 +60,12 @@ export default class GovmapService {
                 height: 20
             },
         }
+        return request
+      }
+    async drawBubbles(income) {
         console.log('before: displayGeometries')
         try {
+            const request = await this.getBubblesRequest(income)
             const response = await window.govmap.displayGeometries(request)
             console.log('after: displayGeometries')
             console.log(response)
