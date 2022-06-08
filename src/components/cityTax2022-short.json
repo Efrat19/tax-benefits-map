@@ -1,0 +1,20 @@
+[
+    {
+      "cityID": 473,
+      "cityName": "אבו סנאן",
+      "benefitRate": 12,
+      "benefitCeiling": 171000
+    },
+    {
+      "cityID": 1342,
+      "cityName": "אבו קורינאת",
+      "benefitRate": 12,
+      "benefitCeiling": 196080
+    },
+    {
+      "cityID": 1375,
+      "cityName": "אבו תלול",
+      "benefitRate": 12,
+      "benefitCeiling": 196080
+    }
+   ]
