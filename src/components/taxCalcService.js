@@ -1,6 +1,6 @@
 
 // https://protocol.co.il/beneficiary-settlement/
-import cityTaxArray from './cityTax2022-short.json'
+import cityTaxArray from './cityTax2022.json'
 
 export default class TaxCalcService {
 

@@ -21,14 +21,24 @@ export default class GovmapService {
     async getCityCoords(cityTax) {
         const response = await window.govmap.geocode({ keyword: cityTax.cityName, type: window.govmap.geocodeType.AccuracyOnly })
         const answers = response.data
-        const rightAnswer = answers.find(x => {
-            // console.log(` cityTax.cityID: ${cityTax.cityID}, x.ObjectID: ${x.ObjectID}, result: ${x.ObjectID == cityTax.cityID}`)
-            return x.ObjectID == cityTax.cityID
-        })
-        return {
-            city: rightAnswer.ResultLable,
-            x: rightAnswer.X,
-            y: rightAnswer.Y
+        try {
+            const rightAnswer = answers.find(x => {
+                // console.log(` cityTax.cityID: ${cityTax.cityID}, x.ObjectID: ${x.ObjectID}, result: ${x.ObjectID == cityTax.cityID}`)
+                return x.ObjectID == cityTax.cityID
+            })
+            return {
+                city: rightAnswer.ResultLable,
+                x: rightAnswer.X,
+                y: rightAnswer.Y
+            }
+        }
+        catch (error) {
+            console.log(`Failed to find city: ${cityTax.cityName}`)
+            return {
+                city: "",
+                x: "",
+                y: ""
+            }
         }
     }
     async getBubblesRequest(income) {
@@ -41,8 +51,8 @@ export default class GovmapService {
             wkts.push(this.coordsToWkt(coords.x, coords.y))
             names.push(cityTax.cityName)
             const benefit = this.taxCalculator.calcMonthlyBenefitBy(cityTax, income)
-            tooltips.push(`save ${benefit}₪`)
-            console.log(`you save ${benefit}₪/month in ${cityTax.cityName}`)
+            tooltips.push(`save ${benefit}₪ in ${cityTax.cityName}`)
+            // console.log(`you save ${benefit}₪/month in ${cityTax.cityName}`)
         })
         await Promise.all(cityPromises);
         console.log('after map')
@@ -61,7 +71,7 @@ export default class GovmapService {
             },
         }
         return request
-      }
+    }
     async drawBubbles(income) {
         try {
             const request = await this.getBubblesRequest(income)
@@ -70,7 +80,7 @@ export default class GovmapService {
             console.log('after: displayGeometries')
             console.log(response)
         } catch (error) {
-            console.error(error) 
+            console.error(error)
         }
 
     }
