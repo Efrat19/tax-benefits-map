@@ -3,4 +3,8 @@
 
 The data is based on gov 2022 cities list
 
-Enjoy
+```console
+docker run -p 8080:80 efrat19/tax-benefits-map:latest
+```
+
+Enjoy!

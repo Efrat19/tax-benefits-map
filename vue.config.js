@@ -1,5 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
-  transpileDependencies: true,
-  publicPath: '/tax-benefits-map/'
+  transpileDependencies: true
+  // publicPath: '/tax-benefits-map/'
 })
