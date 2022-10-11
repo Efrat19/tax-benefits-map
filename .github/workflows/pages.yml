@@ -30,6 +30,8 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
+      - name: Install deps
+        run: yarn install
       - name: Pre-deploy - Build dist dir
         run: yarn predeploy
       - name: Deploy
