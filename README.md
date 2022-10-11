@@ -6,7 +6,7 @@
 
 ```console
 docker run -p 8080:80 efrat19/tax-benefits-map:latest
-open localhost:8080
+open http://localhost:8080
 ```
 ![demo](./demo.png)
 
