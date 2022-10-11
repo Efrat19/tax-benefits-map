@@ -45,17 +45,21 @@ export default class GovmapService {
         const wkts = []
         const names = []
         const tooltips = []
+        const log = []
         console.log('before map')
         const cityPromises = this.taxCalculator.cityTaxArray.map(async cityTax => {
-            const coords = await this.getCityCoords(cityTax)
-            wkts.push(this.coordsToWkt(coords.x, coords.y))
-            names.push(cityTax.cityName)
             const benefit = this.taxCalculator.calcMonthlyBenefitBy(cityTax, income)
-            tooltips.push(`save ${benefit}₪ in ${cityTax.cityName}`)
-            // console.log(`you save ${benefit}₪/month in ${cityTax.cityName}`)
+            // if (benefit > 2500) {
+                const coords = await this.getCityCoords(cityTax)
+                wkts.push(this.coordsToWkt(coords.x, coords.y))
+                names.push(cityTax.cityName)
+                tooltips.push(`save ${benefit}₪ in ${cityTax.cityName}`)
+                log.push(`you save ${benefit}₪/month in ${cityTax.cityName}`)
+            // }
         })
         await Promise.all(cityPromises);
         console.log('after map')
+        console.log(log)
         const request = {
             wkts: wkts,
             names: names,

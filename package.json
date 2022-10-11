@@ -2,6 +2,7 @@
   "name": "tax-benefits-map",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://efrat19.github.io/tax-benefits-map",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -20,6 +21,7 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "gh-pages": "^4.0.0",
     "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
