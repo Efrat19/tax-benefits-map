@@ -1,5 +1,5 @@
 # tax-benefits-map
-## Israeli location-based benefits tax calculator
+## Israeli location-based tax benefits calculator
 
 - The data is based on gov 2022 cities list
 - Unfortunately gov maps API is only free from localhost domain so I couldnt publish it to pages :( adding docker instead:
