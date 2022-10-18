@@ -11,7 +11,7 @@ open http://localhost:8080
 
 or from source:
 ```
-yarn install
+yarn
 yarn serve
 ```
 
