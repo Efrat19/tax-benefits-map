@@ -8,6 +8,13 @@
 docker run -p 8080:80 efrat19/tax-benefits-map:latest
 open http://localhost:8080
 ```
+
+or from source:
+```
+yarn install
+yarn serve
+```
+
 ![demo](./demo.png)
 
 
